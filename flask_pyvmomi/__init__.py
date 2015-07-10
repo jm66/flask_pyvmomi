@@ -17,8 +17,8 @@ import requests
 
 # disable  urllib3 warnings
 requests.packages.urllib3.disable_warnings()
-# Python 2.7.9 CERTIFICATE_VERIFY_FAILED
-if sys.version.split(' ')[0] == '2.7.9':
+# Python 2.7.9, 2.10 CERTIFICATE_VERIFY_FAILED
+if sys.version.split(' ')[0] in ['2.7.9', '2.7.10']:
     ssl._create_default_https_context = ssl._create_unverified_context
 
 
