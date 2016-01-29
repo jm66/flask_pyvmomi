@@ -10,6 +10,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+import ssl
 from flask import Flask
 from pyVim import connect
 from base64 import b64decode
@@ -69,14 +70,25 @@ class pyVmomi(object):
             app.config.get('VCENTER_PASSWORD')
         if vcenter_password:
             options['vcenter_password'] = vcenter_password
+
+        vcenter_check_ssl = app.config.get('VCENTER_CHECK_SSL')
+        if vcenter_check_ssl:
+            options['vcenter_check_ssl'] = vcenter_check_ssl
         self.options = options
 
     def connect(self):
         try:
-            si = connect.SmartConnect(host=self.options['vcenter_server'],
-                                      user=self.options['vcenter_username'],
-                                      port=self.options['vcenter_port'],
-                                      pwd=self.options['vcenter_password'])
+            if self.options['vcenter_check_ssl']:
+                si = connect.SmartConnect(host=self.options['vcenter_server'],
+                                          user=self.options['vcenter_username'],
+                                          port=self.options['vcenter_port'],
+                                          pwd=self.options['vcenter_password'],
+                                          sslContext=ssl._create_unverified_context())
+            else:
+                si = connect.SmartConnect(host=self.options['vcenter_server'],
+                                          user=self.options['vcenter_username'],
+                                          port=self.options['vcenter_port'],
+                                          pwd=self.options['vcenter_password'])
             print('Flask-pyVmomi: Initializing vCenter connection')
             print('Flask-pyVmomi: Got session key: {}'.format(si.content.sessionManager.currentSession.key))
             return si
