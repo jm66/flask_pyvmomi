@@ -14,7 +14,7 @@ from setuptools import setup
 
 setup(
     name='Flask-pyVmomi',
-    version='1.0.2015.7.3',
+    version='1.1.2016.1.29',
     packages=['flask_pyvmomi'],
     url='https://gitlab.eis.utoronto.ca/vss/flask-pyvmomi',
     license='Apache 2.0',
@@ -22,14 +22,13 @@ setup(
     author_email='jm.lopez@utoronto.ca',
     description='Adds pyVmomi support to Flask',
     keywords=['pyvmomi', 'vmware'],
-    install_requires=['flask>=0.10.1', 'pyvmomi'],
+    install_requires=['flask>=0.10.1', 'pyvmomi>=6.0.0'],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
         'Natural Language :: English',
         'Operating System :: OS Independent',
         'Programming Language :: Python',
-        'Programming Language :: Python :: 2.6',
         'Programming Language :: Python :: 2.7'
     ]
 )
