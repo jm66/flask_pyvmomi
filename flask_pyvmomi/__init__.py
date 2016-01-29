@@ -11,16 +11,11 @@
 # limitations under the License.
 
 """Flask extension for pyVmomi."""
-import ssl
-import sys
 import requests
 
 # disable  urllib3 warnings
 requests.packages.urllib3.disable_warnings()
-# Python 2.7.9 CERTIFICATE_VERIFY_FAILED
-if sys.version.split(' ')[0] == '2.7.9':
-    ssl._create_default_https_context = ssl._create_unverified_context
-
 
 from flask_pyvmomi.pyvmomi import pyVmomi
 from flask_pyvmomi.exceptions import pyVmomiError
+
