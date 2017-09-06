@@ -22,7 +22,7 @@ setup(
     author_email='jm.lopez@utoronto.ca',
     description='Adds pyVmomi support to Flask',
     keywords=['pyvmomi', 'vmware'],
-    install_requires=['flask>=0.10.1', 'pyvmomi>=6.0.0'],
+    install_requires=['flask>=0.12.2', 'pyvmomi>=6.5.0'],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Intended Audience :: Developers',
