@@ -25,7 +25,7 @@ try:
 except ImportError:
     from flask import _request_ctx_stack as stack
 
-LOGGER = logging.getLogger('flask_pyvmomi')
+logger = logging.getLogger(__name__)
 
 
 class pyVmomi(object):
@@ -89,8 +89,10 @@ class pyVmomi(object):
                                           user=self.options['vcenter_username'],
                                           port=self.options['vcenter_port'],
                                           pwd=self.options['vcenter_password'])
-            print('Flask-pyVmomi: Initializing vCenter connection')
-            print('Flask-pyVmomi: Got session key: {}'.format(si.content.sessionManager.currentSession.key))
+            logger.info('Flask-pyVmomi: Initializing vCenter connection to {}'.format(
+                self.options['vcenter_server']))
+            logger.info('Flask-pyVmomi: Got session key: {}'.format(
+                si.content.sessionManager.currentSession.key))
             return si
         except vim.fault as e:
             raise pyVmomiError(e.msg)
@@ -100,6 +102,8 @@ class pyVmomi(object):
     def teardown(self, exception):
         ctx = stack.top
         if hasattr(ctx, 'vcenter'):
+            logger.info('Flask-pyVmomi: Terminating vCenter connection to {}'.format(
+                self.options['vcenter_server']))
             connect.Disconnect(ctx.vcenter)
 
     @property
