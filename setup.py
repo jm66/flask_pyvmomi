@@ -14,9 +14,9 @@ from setuptools import setup
 
 setup(
     name='Flask-pyVmomi',
-    version='1.2',
+    version='1.3',
     packages=['flask_pyvmomi'],
-    url='https://gitlab.eis.utoronto.ca/vss/flask-pyvmomi',
+    url='https://gitlab-ee.eis.utoronto.ca/vss/flask-pyvmomi',
     license='Apache 2.0',
     author='University of Toronto',
     author_email='jm.lopez@utoronto.ca',
